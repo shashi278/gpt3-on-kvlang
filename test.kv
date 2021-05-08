@@ -1,0 +1,60 @@
+#:import colors kivymd.color_definitions.colors
+#:import cfh kivy.utils.get_color_from_hex
+BoxLayout:
+	orientation:"vertical"
+	MDToolbar:
+		title: "GPT-3 Model on Kvlang"
+		elevation: 10
+	
+	BoxLayout:
+		orientation: "vertical"
+
+		spacing: dp(20)
+		padding: dp(25)
+		
+		BoxLayout:
+			spacing: dp(20)
+			size_hint_y: .3
+
+			AnchorLayout:
+				#size_hint_x: .7
+				id: anchor_layout
+				MDTextField:
+					id: txt_field
+					hint_text: "Enter command here"
+					helper_text: "Eg. Create a screen with two blue buttons placed vertically"
+					helper_text_mode: "on_focus"
+					mode: "rectangle"
+					pos_hint: {"center_y":.51}
+					size_hint_x: None
+					width: dp(self.parent.width)-50
+			
+			BoxLayout:
+				size_hint_x: .24
+				MDRaisedButton:
+					height: dp(44)
+					text: "SUBMIT"
+					elevation: 8
+					pos_hint: {"center_y":.45}
+					on_release: app.add_new(root.ids.txt_field.text, self)
+		
+		TextInput:
+			id: code_input
+
+	AnchorLayout:
+		
+		AnchorLayout:
+			id: result_layout
+			# size_hint_x: .8
+			# size_hint_y: .8
+			InfoLabel:
+				text: "Result will be shown here"
+
+
+<InfoLabel>:
+	id: info_label
+	halign: "center"
+	theme_text_color: "Custom"
+	text_color: cfh(colors[self._color]['500'])
+	font_style: "H4"
+			
